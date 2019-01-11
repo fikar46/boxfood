@@ -941,4 +941,149 @@ h1.welcome-h1 {
     margin-right: -15px;
     margin-left: -15px;
 }
-  
+
+.main {
+  overflow: hidden;
+}
+.pricing-header.px-3.py-3.pt-md-5.pb-md-4.mx-auto.text-center {
+  margin-top: 50px;
+}
+video.video-carousell {
+  width: 100%;
+  height: auto;
+  display: block;
+  bottom: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -100;
+}
+
+.textonvideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  bottom: 0;
+  margin: 300px;
+}
+button.btn.btn-success.signup {
+  margin-top: 10px;
+  background-color: #0000e2;
+  border-color: #0000e2;
+}
+
+/* pixel iphone+ */
+@media only screen and (max-width: 500px) {
+  .textonvideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    bottom: 0;
+    margin: 115px;
+  }
+  h1.ukuran-text {
+    font-size: 35px;
+}
+button.btn.btn-success.signup {
+  margin-top: 5px;
+  padding: 3px;
+  font-size: 11px;
+  background-color: #0000e2;
+  border-color: #0000e2;
+}
+}
+/* galaxys5 iphone678x*/
+@media only screen and (max-width: 400px) { 
+  .textonvideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    bottom: 0;
+    margin: 110px;
+  }
+  h1.ukuran-text {
+    font-size: 25px;
+}
+button.btn.btn-success.signup {
+  margin-top: 5px;
+  padding: 3px;
+  font-size: 11px;
+  background-color: #0000e2;
+  border-color: #0000e2;
+}
+}
+.row.align-items-center.justify-content-between {
+  margin: 10px;
+}
+.col-lg-12.text-center.menutemplate {
+  width: 100%;
+  box-shadow: 0 8px 10px 0 rgba(0,0,0,0.05);
+  border: solid 1px #e6e6e6;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  top: 20px;
+}
+.mainonthe-menu {
+  margin-top: 50px;
+}
+h1.menu-tittle-mingguan {
+  font-size: 25px;
+  float: left;
+}
+.panel-heading {
+  border: 0.3px solid #cacac8;
+  padding-bottom: 20px;
+  background: white;
+  line-height: 3px;
+  padding-top: 10px
+}
+
+.panel-footer {
+  border: 0.3px solid #cacac8;
+  background: white;
+  margin-bottom: 20px;
+  overflow:hidden;
+  width: 100%;
+}
+p.detail-item {
+  float: right;
+  padding: 5px;
+  color: blue;
+}
+
+.menutemplate2 {
+  background: white;
+  width: 100%;
+  float: left;
+  box-shadow: 0 8px 10px 0 rgba(0,0,0,0.05);
+  border: solid 1px #e6e6e6;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  top: 20px;
+  margin-bottom: 50px;
+}
+p.sub-plan {
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+.pilihan {
+  text-align: center;
+}
+
+span.pilihan1 {
+  margin: 8%;
+  font-size: 20px;
+}
+
+div#true {
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px;
+}

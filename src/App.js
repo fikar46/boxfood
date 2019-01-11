@@ -6,6 +6,9 @@ import Header from './component/folder/header';
 // import Footer from './component/Footer';
 // import { Button } from 'reactstrap';
 import './support/css/bootstrap.css';
+import './support/css/bootstrap.min.css';
+import './support/css/bootstrap.css';
+import "./support/css/custom.css";
 import Login from './component/folder/login';
 // import InputLogin from './component/inputlogin';
 import {Route} from 'react-router-dom';
@@ -28,6 +31,9 @@ import OnTheMenu from './component/folder/onthemenu';
 import ProdukDetail from './component/folder/produkdetail';
 import Cart from './component/folder/cart';
 import Histori from './component/folder/history';
+import Harga from './component/folder/harga';
+import Meal from './component/folder/meal-selection';
+import CheckOut from './component/folder/checkout';
 const cookies = new Cookies();
 class App extends Component {
   componentDidMount(){
@@ -55,12 +61,34 @@ class App extends Component {
           <Route path='/produkdetail' component={ProdukDetail}/>
           <Route path='/cart' component={Cart}/>
           <Route path='/history' component={Histori}/>
+          <Route path="/harga" component={Harga}/>
+          <Route path="/meal-selection" component={Meal}/>
+          <Route path="/checkout" component={CheckOut}/>
           <Footer />
           
         </div>
       );
     }
-    return(<div><center><h1>Loading...</h1></center></div>);
+    return(<div>
+      {/* Preloader */}
+      <div id="loading">
+        <div id="loading-center">
+          <div id="loading-center-absolute">
+            <div className="object" />
+            <div className="object" />
+            <div className="object" />
+            <div className="object" />
+            <div className="object" />
+            <div className="object" />
+            <div className="object" />
+            <div className="object" />
+            <div className="object" />
+            <div className="object" />
+          </div>
+        </div>
+      </div>
+      {/*End off Preloader */}
+    </div>);
     
   }
 }

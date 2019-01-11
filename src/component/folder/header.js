@@ -59,9 +59,31 @@ import {
     return(
           <div class="header">
             <Navbar  light expand="md">
-            <Link to='/'><NavbarBrand style={{color:'black'}}>Boxfood</NavbarBrand></Link>
+            <Link to='/'><NavbarBrand style={{color:'black'}}>Box<span style={{color:'#ffcb0f'}}>food</span></NavbarBrand></Link>
               <NavbarToggler onClick={this.toggle} />
               <Collapse isOpen={this.state.isOpen} navbar>
+              <Nav className="mr-auto" navbar>
+                <NavItem>
+                   <a href="/onthemenu"><NavLink>On The Menu</NavLink></a>
+                  </NavItem>
+                  <NavItem>
+                   <a href="/harga"><NavLink>Harga</NavLink></a>
+                  </NavItem>
+                  <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>
+                      How it works
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                    <a href="/how-it-works"> <DropdownItem>
+                        How it works
+                      </DropdownItem></a>
+                      <Link to='/recycling'><DropdownItem>
+                        Recycling
+                      </DropdownItem></Link>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+        
+              </Nav>
                 <Nav className="ml-auto" navbar>
                 <NavItem>
                   <Link to='/about'><NavLink>About</NavLink></Link>
@@ -81,21 +103,32 @@ import {
         return (
           <div class="header">
             <Navbar light expand="md">
-              <a href='/homes'><NavbarBrand style={{color:'black'}}>Boxfood</NavbarBrand></a>
+              <a href='/homes'><NavbarBrand style={{color:'black'}}>Box<span style={{color:'#ffcb0f'}}>food</span></NavbarBrand></a>
               <NavbarToggler onClick={this.toggle} />
               <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="mr-auto" navbar>
-              <NavItem>
-                <form className="search-button-d">
-                    <input type="text" className="form-input" ref="searchNama" placeholder="cari username" />
-                    <input type="button" className="btn btn-success" value="Search" onClick={this.onBtnSearchClick} />
-                 </form>
-                </NavItem>
-              </Nav>
-                <Nav className="ml-auto" navbar>
                 <NavItem>
                    <a href="/onthemenu"><NavLink>On The Menu</NavLink></a>
                   </NavItem>
+                  <NavItem>
+                   <a href="/harga"><NavLink>Harga</NavLink></a>
+                  </NavItem>
+                  <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>
+                      How it works
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                    <a href="/how-it-works"> <DropdownItem>
+                        How it works
+                      </DropdownItem></a>
+                      <Link to='/recycling'><DropdownItem>
+                        Recycling
+                      </DropdownItem></Link>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+        
+              </Nav>
+                <Nav className="ml-auto" navbar>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                       Hello, {this.props.username}

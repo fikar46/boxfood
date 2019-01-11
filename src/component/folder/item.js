@@ -7,19 +7,19 @@ class Item extends Component{
     }
 
     render(){
-        const {namaproduk,image,caption} = this.props.produk;
+        const {id,namaproduk,image,caption} = this.props.produk;
         return(
-    <div onClick={this.onItemClick} className="container">    
-        <div className="row">
-          <div className="col-sm-4">
+        
+          <div onClick={this.onItemClick} className="col-sm-4 file">
             <div className="panel panel-primary">
-              <div className="panel-heading">{namaproduk}</div>
+            
               <div className="panel-body"><img src={image} className="img-responsive" style={{width: '100%'}} alt="Image" /></div>
-              <div className="panel-footer">{caption}</div>
+              <div className="panel-heading"><p className="text-produk">{namaproduk}</p><p className="text-produk">{caption}</p></div>
+              <div className="panel-footer"><a href={`/produkdetail?produkid=${id}&namaproduk=${namaproduk}`}><p className='detail-item'>Detail</p></a></div>
             </div>
           </div>
-        </div>
-      </div>
+       
+    
         );
     }
 }
