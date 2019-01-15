@@ -1,158 +1,112 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from 'react'
+import '../../support/css/admin.css'
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {Redirect}from 'react-router-dom';
+import axios from 'axios';
+import {Redirect} from 'react-router-dom';
+import queryString from 'query-string';
+import {Button} from 'reactstrap'
 class Admin extends Component{
-    state= {
-        listProduk: [],
-        selectedEdit:0
+    state={
+        chart:[]
     };
     componentDidMount(){
-        this.getTryoutList();
-    }
-    getTryoutList=()=>{
-        axios.get('http://localhost:1997/produk')
-        .then((data)=> {
-            console.log(data.data)
-            this.setState({listProduk:data.data, selectedEdit:0})
+        axios.get("http://localhost:1997/cart")
+        .then((res)=>{
+            console.log(res.data);
+            this.setState({chart:res.data})
+            console.log(this.state.chart)
         }).catch((err)=>{
             console.log(err)
         })
     }
-    onBtnAddClick=()=>{
-        var namaproduk = this.refs.namaAdd.value;
-        var image = this.refs.imageAdd.value;
-        var caption = this.refs.capAdd.value;
-        var description= this.refs.descAdd.value;
-
-        axios.post('http://localhost:1997/produk',{
-            namaproduk, image, caption, description
-        }).then((res)=>{
-            this.getTryoutList()
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }
-    onBtnEditClick=(id)=>{
-        var namaproduk = this.refs.namaEdit.value;
-        var image = this.refs.imageEdit.value;
-        var caption = this.refs.capEdit.value;
-        var description= this.refs.descEdit.value;
-
-        axios.put('http://localhost:1997/produk/'+id,{
-            namaproduk, image, caption, description
-        }).then((res)=>{
-            this.getTryoutList();
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }
-    onBtnDeleteClick=(id)=>{
-        if(window.confirm('Apakah anda yakin ingin menghapusnya?')){
-            axios.delete('http://localhost:1997/produk/'+id)
-                .then((res)=>{
-                    this.getTryoutList();
-                }).catch((err)=>{
-                    console.log(err)
-                })
-        }
-    }
-    
-    renderListProduk = ()=>{
-        var listJSXProduk = this.state.listProduk.map((item)=>{
-            if(item.id !== this.state.selectedEdit){
-                return(
-                    <tr>
-                        <td>{item.id}</td>
-                        <td>{item.namaproduk}</td>
-                        <td>{item.caption}</td>
-                        <td>{item.description}</td>
-                        <td><img src={item.image} alt='img' className='image-admin'/> </td>
-                        <td><input onClick={()=> this.setState({selectedEdit: item.id})} type="button" value="Edit" className="btn btn-primary"/></td>
-                        <td><input onClick={()=> this.onBtnDeleteClick(item.id)} type="button" value="Delete" className="btn btn-danger"/></td>
-                        
-                    </tr>
-                    )
-            }
+    chartTampil=()=>{
+        var chartTampilDiTable = this.state.chart.map((item)=>{
             return(
                 <tr>
-                    <td>{item.id}</td>
-                    <td><input type="text" defaultValue={item.namaproduk} ref="namaEdit"/></td>
-                    <td><input type="text" defaultValue={item.caption} ref="capEdit"/></td>
-                    <td><input type="text" defaultValue={item.description} ref="descEdit"/></td>
-                    <td><input type="text" defaultValue={item.image} ref="imageEdit"/></td>
-                    <td><input onClick={()=> this.onBtnEditClick(item.id)} type="button" value="Submit" className="btn btn-primary"/></td>
-                    <td><input onClick={()=> this.setState({selectedEdit:0})} type="button" value="Cancel" className="btn btn-danger"/></td>
-                    
-                </tr>
-                )
-            
+                      <td className="serial"><a href={item.paket}>{item.id}</a></td>
+                      <td>
+                        {/* <div className="round-img">
+                          <a href="#"><img className="rounded-circle" src="images/avatar/1.jpg" alt /></a>
+                        </div> */}
+                       boxfood-{item.id_pesanan}
+                      </td>
+                      <td> {item.username} </td>
+                      <td> <span className="name">{item.paket}</span> </td>
+                      <td> <span className="product">{item.person}</span> </td>
+                      <td><span className="count">{item.week}</span></td>
+                      <td>
+                        <span className="badge badge-complete">{item.status}</span>
+                      </td>
+                      <td>
+                          <Button color="warning">Proses</Button>
+                      </td>
+                    </tr>
+            )
         })
-        return listJSXProduk
+        return chartTampilDiTable
     }
     render(){
-        if(this.props.username === ''){
-            return<Redirect to="/login"/>
-        }else{
         return(
-            <div className="container-fluid"> 
-                <h1>Menu Admin Tryout</h1>
-                <table className="tableadmin">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama produk</th>
-                            <th>Caption produk</th>
-                            <th>Desc produk</th>
-                            <th>Image</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {this.renderListProduk()} 
-                    </tbody>
-                    <tfoot>
-                        <td>Input</td>
-                        <td>
-                            <input ref="namaAdd" type="text" placeholder="Nama Produk" />
-                        </td>
-                        <td>
-                            <input ref="capAdd" type="text" placeholder="caption Produk"/>
-                        </td>
-                        <td>
-                            <input ref="descAdd" type="text" placeholder="deskripsi"/>
-                        </td>
-                        <td>
-                            <input ref="imageAdd" type="text" placeholder="Link image" /> 
-                        </td>
-                        <td>
-                            <input onClick={this.onBtnAddClick} type="button" className="btn btn-button--success" value="submit"/>
-                        </td>
-                        <td></td>
-                    </tfoot>
-                </table>
-                
+            <div className="admin-page-box">
+            <div className="row">
+        <div className="col-xl-8">
+          <div className="card">
+            <div className="card-body">
+              <h4 className="box-title">Orders </h4>
             </div>
-        );
-        }
-    
+            <div className="card-body--">
+              <div className="table-stats order-table ov-h">
+                <table className="table ">
+                  <thead>
+                    <tr>
+                      <th className="serial">#</th>
+                      <th>ID Pesanan</th>
+                      <th>Nama</th>
+                      <th>Paket</th>
+                      <th>Orang</th>
+                      <th>Minggu</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.chartTampil()}
+                  </tbody>
+                </table>
+              </div> 
+            </div>
+          </div> 
+        </div> 
+        <div className="col-xl-4">
+          <div className="row">
+            <div className="col-lg-6 col-xl-12">
+            <a href="/adminInput">
+              <div className="card bg-flat-color-3  ">
+                <div className="card-body">
+                  <h4 className="card-title m-0  white-color ">Input Produk</h4>
+                </div>
+                <div className="card-body">
+                  <div id="flotLine5" className="flot-line" style={{padding: '0px', position: 'relative'}}><canvas className="flot-base" width={276} height={105} style={{direction: 'ltr', position: 'absolute', left: '0px', top: '0px', width: '276px', height: '105px'}} /><canvas className="flot-overlay" width={276} height={105} style={{direction: 'ltr', position: 'absolute', left: '0px', top: '0px', width: '276px', height: '105px'}} /></div>
+                </div>
+              </div>
+              </a>
+            </div>
+            
+            <div className="col-lg-6 col-xl-12">
+              <div className="card bg-flat-color-3  ">
+                <div className="card-body">
+                  <h4 className="card-title m-0  white-color ">user: 2200</h4>
+                </div>
+                <div className="card-body">
+                  <div id="flotLine5" className="flot-line" style={{padding: '0px', position: 'relative'}}><canvas className="flot-base" width={276} height={105} style={{direction: 'ltr', position: 'absolute', left: '0px', top: '0px', width: '276px', height: '105px'}} /><canvas className="flot-overlay" width={276} height={105} style={{direction: 'ltr', position: 'absolute', left: '0px', top: '0px', width: '276px', height: '105px'}} /></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+      </div>
+        )
     }
 }
-const mapStateToProps = (state) => {
-    return{
-      username:state.auth.username
-    }
-  }
-export default  connect(mapStateToProps, null)(Admin);
-
-
-
-
-
-
-
-
-
-
+export default Admin;

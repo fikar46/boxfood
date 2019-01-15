@@ -25,7 +25,7 @@ import './support/css/hover.css';
 import Cookies from "universal-cookie";
 import {keepLogin,cookieChecked} from './actions';
 import {withRouter} from 'react-router-dom';
-import Admin from './component/folder/admin';
+import AdminInputProduk from './component/folder/adminInputProduk';
 import Footer from './component/folder/Footer';
 import OnTheMenu from './component/folder/onthemenu';
 import ProdukDetail from './component/folder/produkdetail';
@@ -34,6 +34,8 @@ import Histori from './component/folder/history';
 import Harga from './component/folder/harga';
 import Meal from './component/folder/meal-selection';
 import CheckOut from './component/folder/checkout';
+import Payment from './component/folder/payment';
+import Admin from './component/folder/admin';
 const cookies = new Cookies();
 class App extends Component {
   componentDidMount(){
@@ -56,7 +58,7 @@ class App extends Component {
           <Route path = '/register' component = {Register}/>
           <Route  path='/about' component={About}/>
           <Route path='/homes' component={Homes}/>
-          <Route path='/admin' component={Admin}/>
+          <Route path='/adminInput' component={AdminInputProduk}/>
           <Route path='/onthemenu' component={OnTheMenu}/>
           <Route path='/produkdetail' component={ProdukDetail}/>
           <Route path='/cart' component={Cart}/>
@@ -64,6 +66,8 @@ class App extends Component {
           <Route path="/harga" component={Harga}/>
           <Route path="/meal-selection" component={Meal}/>
           <Route path="/checkout" component={CheckOut}/>
+          <Route path="/payment" component={Payment}/>
+          <Route path="/admin" component={Admin}/>
           <Footer />
           
         </div>

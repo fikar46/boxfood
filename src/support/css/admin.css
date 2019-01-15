@@ -1,0 +1,17 @@
+thead {
+    background: #dad1d1;
+    border-collapse: collapse;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+th {
+    color: black;
+    border: none;
+    text-align: center;
+}
+td {
+    border: none;
+}

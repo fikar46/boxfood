@@ -60,15 +60,16 @@ class Meal extends Component{
         var plan = params.plan;
         var recipes = parseInt(params.recipes);
         var person = params.person;
+        var week = params.week;
         var p1= this.state.cSelected[0];
         var p2= this.state.cSelected[1];
         var p3= this.state.cSelected[2];
         var p4= this.state.cSelected[3];
         if(this.state.cSelected.length === jumlah){
             if(jumlah===4){
-                return <a href={`/checkout?plan=${plan}&&recipes=${recipes}&&person=${person}&&p1=${p1}&&p2=${p2}&&p3=${p3}&&p4=${p4}`}> <Button color="warning" active={this.state.cSelected.length !== jumlah}>Lanjutkan ke pembayaran</Button></a>
+                return <a href={`/checkout?plan=${plan}&&week=${week}&&recipes=${recipes}&&person=${person}&&p1=${p1}&&p2=${p2}&&p3=${p3}&&p4=${p4}`}> <Button color="warning" active={this.state.cSelected.length !== jumlah}>Lanjutkan ke pembayaran</Button></a>
             }
-            return <a href={`/checkout?plan=${plan}&&recipes=${recipes}&&person=${person}&&p1=${p1}&&p2=${p2}&&p3=${p3}`}> <Button color="warning" active={this.state.cSelected.length !== jumlah}>Lanjutkan ke pembayaran</Button></a>
+            return <a href={`/checkout?plan=${plan}&&week=${week}&&recipes=${recipes}&&person=${person}&&p1=${p1}&&p2=${p2}&&p3=${p3}`}> <Button color="warning" active={this.state.cSelected.length !== jumlah}>Lanjutkan ke pembayaran</Button></a>
         }
         return <p>Pilih menu dibawah ini untuk melanjutkan pembayaran</p>
     }

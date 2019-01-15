@@ -28,6 +28,15 @@ componentDidMount(){
         console.log(err)
     })
 }
+makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+    for (var i = 0; i < 5; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+    return text;
+}
 getCartList=()=>{
     axios.get(`http://localhost:1997/cart?username=${this.props.username}`)
     .then((data)=> {
@@ -265,11 +274,13 @@ functionTotalSetelahPotongan=()=>{
     
 }
 onCheckoutClick=()=>{
+    var id_pesanan = this.makeid();
     var links = queryString.parse(this.props.location.search)
     console.log(links)
     var plan= links.plan;
     var username= this.props.username;
-    var person= parseInt(links.person)
+    var person= parseInt(links.person);
+    var week = parseInt(links.week);
     var p1= parseInt(links.p1);
     var p2= parseInt(links.p2);
     var p3= parseInt(links.p3);
@@ -287,23 +298,28 @@ onCheckoutClick=()=>{
     var diskon= potongan*harga
     var total= harga-diskon
     var date = now;
+    var saveAddress= this.refs.saveAddress.checked
+    var bri = this.refs.bri.checked;
+    var bni = this.refs.bni.checked;
+    var bca = this.refs.bca.checked;
+    var mandiri = this.refs.mandiri.checked;
     if(this.state.promo === ''){
         if(this.state.cart.username!==username){
         
             axios.post('http://localhost:1997/cart',{
-            username,firstName,lastName,phone,email,address,kelurahan,kota,zipCode,paket:plan,person,id_p1:p1,id_p2:p2,id_p3:p3,id_p4:p4,total_harga:harga,date
+            id_pesanan,username,firstName,lastName,phone,email,address,kelurahan,kota,zipCode,paket:plan,person,id_p1:p1,id_p2:p2,id_p3:p3,id_p4:p4,week,total_harga:harga,saveAddress,bri,bni,bca,mandiri,date
             }).then((res)=>{
                 console.log(res.data)
-                    window.location.reload();
+                window.location = "/payment?id_pesanan="+id_pesanan;
             }).catch((err)=>{
             console.log(err)
             })
     }else{
             axios.put('http://localhost:1997/cart?username='+username,{
-                username,firstName,lastName,phone,email,address,kelurahan,kota,zipCode,paket:plan,person,id_p1:p1,id_p2:p2,id_p3:p3,id_p4:p4,total_harga:harga,date
+                id_pesanan,username,firstName,lastName,phone,email,address,kelurahan,kota,zipCode,paket:plan,person,id_p1:p1,id_p2:p2,id_p3:p3,id_p4:p4,week,total_harga:harga,saveAddress,bri,bni,bca,mandiri,date
             }).then((res)=>{
                 console.log(res.data)
-                window.location.reload();
+                window.location = "/payment?id_pesanan="+id_pesanan;
         }).catch((err)=>{
         console.log(err)
         })
@@ -312,19 +328,19 @@ onCheckoutClick=()=>{
         if(this.state.cart.username!==username){
         
             axios.post('http://localhost:1997/cart',{
-            username,firstName,lastName,phone,email,address,kelurahan,kota,zipCode,paket:plan,person,id_p1:p1,id_p2:p2,id_p3:p3,id_p4:p4,total_harga:total,date
+                id_pesanan,username,firstName,lastName,phone,email,address,kelurahan,kota,zipCode,paket:plan,person,id_p1:p1,id_p2:p2,id_p3:p3,id_p4:p4,week,total_harga:total,saveAddress,bri,bni,bca,mandiri,date
             }).then((res)=>{
                 console.log(res.data)
-                    window.location.reload();
+                window.location = "/payment?id_pesanan="+id_pesanan;
             }).catch((err)=>{
             console.log(err)
             })
     }else{
             axios.put('http://localhost:1997/cart?username='+username,{
-                username,firstName,lastName,phone,email,address,kelurahan,kota,zipCode,paket:plan,person,id_p1:p1,id_p2:p2,id_p3:p3,id_p4:p4,total_harga:total,date
+                id_pesanan,username,firstName,lastName,phone,email,address,kelurahan,kota,zipCode,paket:plan,person,id_p1:p1,id_p2:p2,id_p3:p3,id_p4:p4,week, total_harga:total,saveAddress,bri,bni,bca,mandiri,date
             }).then((res)=>{
                 console.log(res.data)
-                window.location.reload();
+                window.location = "/payment?id_pesanan="+id_pesanan;
         }).catch((err)=>{
         console.log(err)
         })
@@ -458,18 +474,22 @@ onCheckoutClick=()=>{
                               <hr className="mb-4" />
                               <h4 className="mb-3">Payment</h4>
                               <div className="d-block my-3">
-                                {/* <div className="custom-control custom-radio">
-                                  <input id="credit" name="paymentMethod" type="radio" className="custom-control-input" defaultChecked required />
-                                  <label className="custom-control-label" htmlFor="credit">Credit card</label>
-                                </div> */}
                                 <div className="custom-control custom-radio">
-                                  <input id="debit" name="paymentMethod" type="radio" className="custom-control-input" required />
-                                  <label className="custom-control-label" htmlFor="debit">Debit card</label>
+                                  <input ref="bri" id="bri" name="paymentMethod" type="radio" className="custom-control-input" defaultChecked required />
+                                  <label className="custom-control-label" htmlFor="bri">Transfer BRI</label>
                                 </div>
-                                {/* <div className="custom-control custom-radio">
-                                  <input id="paypal" name="paymentMethod" type="radio" className="custom-control-input" required />
-                                  <label className="custom-control-label" htmlFor="paypal">Paypal</label>
-                                </div> */}
+                                <div className="custom-control custom-radio">
+                                  <input ref="bni" id="bni" name="paymentMethod" type="radio" className="custom-control-input" required />
+                                  <label className="custom-control-label" htmlFor="bni">Transfer BNI</label>
+                                </div>
+                                <div className="custom-control custom-radio">
+                                  <input ref="bca" id="bca" name="paymentMethod" type="radio" className="custom-control-input" required />
+                                  <label className="custom-control-label" htmlFor="bca">Transfer BCA</label>
+                                </div>
+                                <div className="custom-control custom-radio">
+                                  <input ref="mandiri" id="mandiri" name="paymentMethod" type="radio" className="custom-control-input" required />
+                                  <label className="custom-control-label" htmlFor="mandiri">Transfer Mandiri</label>
+                                </div>
                               </div>
                               
                               <hr className="mb-4" />

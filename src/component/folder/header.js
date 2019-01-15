@@ -64,18 +64,21 @@ import {
               <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="mr-auto" navbar>
                 <NavItem>
-                   <a href="/onthemenu"><NavLink>On The Menu</NavLink></a>
+                   <a href="/onthemenu"><NavLink>Daftar Masakan</NavLink></a>
                   </NavItem>
                   <NavItem>
-                   <a href="/harga"><NavLink>Harga</NavLink></a>
+                   <a href="/harga"><NavLink>Paket Menu</NavLink></a>
+                  </NavItem>
+                  <NavItem>
+                   <a href="/harga"><NavLink>Catering</NavLink></a>
                   </NavItem>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
-                      How it works
+                      Cara Kerja
                     </DropdownToggle>
                     <DropdownMenu right>
                     <a href="/how-it-works"> <DropdownItem>
-                        How it works
+                    Cara Kerja
                       </DropdownItem></a>
                       <Link to='/recycling'><DropdownItem>
                         Recycling
@@ -108,18 +111,21 @@ import {
               <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="mr-auto" navbar>
                 <NavItem>
-                   <a href="/onthemenu"><NavLink>On The Menu</NavLink></a>
+                   <a href="/onthemenu"><NavLink>Daftar Masakan</NavLink></a>
                   </NavItem>
                   <NavItem>
-                   <a href="/harga"><NavLink>Harga</NavLink></a>
+                   <a href="/harga"><NavLink>Paket Menu</NavLink></a>
+                  </NavItem>
+                  <NavItem>
+                   <a href="/harga"><NavLink>Catering</NavLink></a>
                   </NavItem>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
-                      How it works
+                    Cara Kerja
                     </DropdownToggle>
                     <DropdownMenu right>
                     <a href="/how-it-works"> <DropdownItem>
-                        How it works
+                    Cara Kerja
                       </DropdownItem></a>
                       <Link to='/recycling'><DropdownItem>
                         Recycling
@@ -134,6 +140,9 @@ import {
                       Hello, {this.props.username}
                     </DropdownToggle>
                     <DropdownMenu right>
+                    <a href="/admin"> <DropdownItem>
+                        Admin
+                      </DropdownItem></a>
                     <a href="/cart"> <DropdownItem>
                         Cart
                       </DropdownItem></a>
